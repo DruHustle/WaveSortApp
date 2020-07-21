@@ -145,7 +145,7 @@ namespace WaveSortApp
                 File.WriteAllText(fileSavePath, csv);
 
                 //Update textbox text
-                PrintTextBox("Download complete. Please find file in the \"Documents\"folder.");
+                PrintTextBox("Download complete. CSV file located in the \"Documents\" folder.");
             }
             else
             {
@@ -227,7 +227,7 @@ namespace WaveSortApp
             //Update textbox text
             textFilePath.Text = text;
             Application.DoEvents();
-            Thread.Sleep(100);
+            Thread.Sleep(1000);
         }
 
         private void ExitButton_Click(object sender, EventArgs e)
