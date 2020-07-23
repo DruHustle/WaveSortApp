@@ -139,10 +139,26 @@ namespace WaveSortApp
         {
             if (fileNameAmplitudeDictionary!= null)
             {
-                string csv = string.Join(Environment.NewLine, fileNameAmplitudeDictionary.Select(d => $"{d.Key},{d.Value},"));
+                string [] headerNames = { "File name", "Volt Amplitude" };
+
+                //Acquire string values of CSV file
+                string csvHeader = string.Join(",", headerNames);
+                string csvRows = string.Join(Environment.NewLine, fileNameAmplitudeSortedDictionary.Select(d => $"{d.Key},{d.Value},"));
+                string csv = string.Concat(csvHeader, ",", Environment.NewLine, csvRows);
+
+                //Acquire filepath
                 string fileFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 string fileSavePath = fileFolder + "/SortedWave.csv";
-                File.WriteAllText(fileSavePath, csv);
+
+                //Write to CSV file
+                try
+                {
+                    File.WriteAllText(fileSavePath, csv);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "GUI Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
 
                 //Update textbox text
                 PrintTextBox("Download complete. CSV file located in the \"Documents\" folder.");
